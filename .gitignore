@@ -29,7 +29,24 @@ playground.xcworkspace
 # hence it is not needed unless you have added a package configuration file to your project
 # .swiftpm
 
+
+# Ignore build and temporary files
 .build/
+
+build/
+*.log
+*.tmp
+
+# macOS system files
+.DS_Store
+
+# Xcode/iOS project files
+*.xcworkspace
+*.xcuserstate
+*.xcuserdatad*
+DerivedData/
+Podfile.lock
+Pods/
 
 # CocoaPods
 #
