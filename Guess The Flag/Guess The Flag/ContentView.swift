@@ -7,6 +7,55 @@
 
 import SwiftUI
 
+struct LargeOrangeTitle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .fontWeight(.bold)
+            .foregroundColor(.orange)
+            .padding()
+    }
+}
+
+extension View {
+    func orangeTitle() -> some View {
+        self.modifier(LargeOrangeTitle())
+    }
+}
+
+struct FlagImage: View {
+    var flag: String
+    
+    var body: some View {
+        Image(flag)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 200, height: 100)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .shadow(radius: 5)
+    }
+}
+
+struct CustomLargeTextField: View {
+    var text: String
+    var body: some View {
+        Text(text)
+            .font(.largeTitle)
+            .fontWeight(.bold)
+    }
+}
+
+struct CustomHeadlineTextField: View {
+    var text: String
+    var body: some View {
+        Text(text)
+            .font(.headline)
+            .fontWeight(.bold)
+            .padding()
+
+    }
+}
+
 struct ContentView: View {
     @State private var score: Int = 0
     @State private var flags: [String] = ["Estonia", "France", "Germany", "Ireland", "Italy", "Monaco", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"]
@@ -18,7 +67,6 @@ struct ContentView: View {
     @State private var alertTitle: String = ""
     
     @State private var gameCount: Int = 0
-    
     
     var body: some View {
         NavigationStack{
@@ -41,23 +89,19 @@ struct ContentView: View {
                 VStack(spacing: 35) {
                     HStack{
                         Spacer()
-                        Text("Score: \(score)")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .padding()
+                        CustomLargeTextField(text: "Score: \(score)")
+                            .orangeTitle()
+
                     }
                     
                     VStack {
-                        Text("Guess The Flag")
-                            .font(.headline)
-                            .fontWeight(.bold)
+                        CustomHeadlineTextField(text: "Guess The Flag")
                             .padding()
-                        Text("Tap flag of \(flags[correctAnswer])")
+                          
+                        CustomLargeTextField(text: "Tap flag of \(flags[correctAnswer])")
                             .lineLimit(nil)
                             .frame(maxWidth: .infinity, alignment: .center)
-                            .font(.largeTitle)
                             .fixedSize(horizontal: false, vertical: true)
-                            .fontWeight(.bold)
                             .padding(50)
                     }
                     
@@ -65,13 +109,7 @@ struct ContentView: View {
                         Button {
                             checkAnswer(index)
                         } label: {
-                            Image(flags[index])
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 200, height: 100)
-                                .clipShape(RoundedRectangle(cornerRadius: 20))
-                                .shadow(radius: 5)
-                                .padding()
+                            FlagImage(flag: flags[index])
                         }
                     }
                     Spacer()

@@ -101,7 +101,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            ScrollView{
+            ScrollView {
                 viewProperty1
                 viewProperty2
                 ViewCompositionText(text: "Using a custom view modifier")
