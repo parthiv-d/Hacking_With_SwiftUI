@@ -58,6 +58,7 @@ struct ContentView: View {
                 
                 Section(header: Text("Total Amount")) {
                     Text(totalAmount, format: .currency(code: "INR"))
+                        .foregroundColor(selectedTipPercentage == 0 ? .red : .green)
                 }
                 
                 Section(header: Text("Amount Per Person")) {
