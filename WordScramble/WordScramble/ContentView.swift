@@ -157,13 +157,13 @@ struct ContentView: View {
                 AddNewWord()
                 // Your custom logic here
             }
-            .frame(width: .infinity, height: 300)
-                .padding()
-                .background(LinearGradient(
-                    colors: [.blue.opacity(0.3), .purple.opacity(0.5)],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                ))
+            .frame(maxWidth: .infinity, maxHeight: 300)
+            .padding()
+            .background(LinearGradient(
+                colors: [.blue.opacity(0.3), .purple.opacity(0.5)],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            ))
             
             List {
                 Section("Found Items :") {
@@ -201,7 +201,7 @@ struct ContentView: View {
     }
     
     func AddNewWord() {
-        let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        let answer = newWord
         guard answer.count > 3 else {
             wordError(title: "Answer Too Short", message: "Words must be longer than 3 letters.")
             return }
@@ -246,7 +246,7 @@ struct ContentView: View {
             do {
                 let startWords = try String(contentsOf: startWordURL)
                 let allWords = startWords.components(separatedBy: "\n")
-                rootWord = allWords.randomElement() ?? "Test"
+                rootWord = allWords.randomElement()?.uppercased() ?? "Test"
                 score = 0
                 usedWords.removeAll()
                 return
