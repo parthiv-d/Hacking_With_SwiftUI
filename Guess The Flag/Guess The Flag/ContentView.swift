@@ -115,13 +115,14 @@ struct ContentView: View {
                     Spacer()
                 }
             }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")) {
+                    resetGame()
+                })
+            }
         }
         .ignoresSafeArea()
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")) {
-                resetGame()
-            })
-        }
+        
     }
     
     func checkAnswer(_ userAnswer: Int) {
