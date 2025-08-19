@@ -167,10 +167,10 @@ struct ContentView: View {
             
             List {
                 Section("Found Items :") {
-                    ForEach(usedWords, id: \.self) { word in
+                    ForEach(0..<5, id: \.self) { word in
                         HStack {
-                            Image(systemName: "\(word.count).circle")
-                            Text(word)
+                            Image(systemName: "\(word).circle")
+                            Text("word")
 
                         }
                     }
